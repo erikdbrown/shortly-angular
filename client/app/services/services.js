@@ -7,6 +7,7 @@ angular.module('shortly.services', [])
 
    return $http({ method: 'GET', url: '/api/links' })
     .then(function(response) {
+      console.log('the actual response' ,response.data)
        return response.data;
     });
   };
@@ -19,13 +20,13 @@ angular.module('shortly.services', [])
       data: JSON.stringify(link)
     })
     .then(function(response) {
-      console.log(response);
        return response;
     });
   };
 
   return serviceApi;
 })
+
 .factory('Auth', function ($http, $location, $window) {
   // Don't touch this Auth service!!!
   // it is responsible for authenticating our user

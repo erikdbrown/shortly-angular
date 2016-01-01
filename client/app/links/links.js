@@ -1,5 +1,13 @@
 angular.module('shortly.links', [])
+
 .controller('LinksController', function ($scope, Links) {
   // Your code here
-  Links.getLinks($scope);
+  $scope.data = {};
+
+  Links.getAll().then(function(data) {
+    console.log("Data in Links Promise.then(): ", data);
+    $scope.data.links = data;
+  })
+  
 });
+
