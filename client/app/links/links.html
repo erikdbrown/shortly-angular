@@ -1,3 +1,11 @@
-<div id='container'>
-  <!-- Your html here -->
+<div id='container' ng-module="shortly.links">
+ <img src='/redirect_icon.png'/>
+  <div class='info' ng-controller="LinksController" ng-repeat="Link in Links">
+    <div class='visits'><span class='count'>{{Link.visits}}</span>Visits</div>
+    <div class='title'>{{Link.title}}</div>
+    <div class='original'>{{Link.url}}</div>
+    <a href='{{base_url}}/{{code}}'>{{Link.base_url}}/{{Link.code}}</a>
+  </div>
 </div>
+
+
