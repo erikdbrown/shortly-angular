@@ -1,9 +1,14 @@
 var User = require('./userModel.js');
-    Q = require('q');
-    jwt = require('jwt-simple');
+var Q = require('q');
+var jwt = require('jwt-simple');
 
-var findUser = Q.nfbind(User.findOne, User);
-var createUser = Q.denodeify(User.create, User);
+console.log("User: ", User);
+
+var findUser = Q.nbind(User.findOne, User);
+var createUser = Q.nbind(User.create, User);
+
+console.log("findUser: ", findUser)
+console.log("createUser: ", createUser)
 
 module.exports = {
   signin: function (req, res, next) {
@@ -38,6 +43,7 @@ module.exports = {
     // check to see if user already exists
     findUser({username: username})
       .then(function (user) {
+        console.log("You're inside the findUser Promise");
         if (user) {
           next(new Error('User already exist!'));
         } else {
