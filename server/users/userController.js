@@ -2,7 +2,7 @@ var User = require('./userModel.js');
     Q = require('q');
     jwt = require('jwt-simple');
 
-var findUser = Q.denodeify(User.findOne, User);
+var findUser = Q.nfbind(User.findOne, User);
 var createUser = Q.denodeify(User.create, User);
 
 module.exports = {
