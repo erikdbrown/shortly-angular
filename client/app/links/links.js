@@ -7,7 +7,6 @@ angular.module('shortly.links', [])
     Links.getAll().then(function(data) {
       console.log("Data in Links Promise.then(): ", data);
       $scope.data.links = data;
-      // remember: this is hard-coded. Need to revert back to data.links = data;
     });
   } else {
     $location.path('/signin');

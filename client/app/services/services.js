@@ -7,21 +7,28 @@ angular.module('shortly.services', [])
 
    return $http({ method: 'GET', url: '/api/links' })
     .then(function(response) {
-      console.log('the actual response' ,response.data)
+      console.log('the actual response' ,response.data);
        return response.data;
     });
   };
 
   serviceApi.addOne = function(link) {
 
-   return $http({ 
-      method: 'POST', 
-      url: '/api/links',
-      data: JSON.stringify(link)
-    })
-    .then(function(response) {
-       return response;
-    });
+    console.log("Attempted Link: ", link.url);
+    var rValidUrl = /^(?!mailto:)(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?:(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[0-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))|localhost)(?::\d{2,5})?(?:\/[^\s]*)?$/i;
+
+    if (link.url.match(rValidUrl)) {
+     return $http({ 
+        method: 'POST', 
+        url: '/api/links',
+        data: JSON.stringify(link)
+      })
+      .then(function(response) {
+         return response;
+      });
+    } else {
+      alert("invalid URL, dummy");
+    }
   };
 
   return serviceApi;
